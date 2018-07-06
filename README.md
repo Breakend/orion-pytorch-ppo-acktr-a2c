@@ -49,5 +49,13 @@ Now we're ready to go to run orion's hyperparameter optimization!
 ## How to search for hyperparameters
 
 ```bash
-orion -v hunt -n ppo_hopper ./main.py --env-name "Hopper-v2" --algo ppo --use-gae --vis-interval 1 --log-interval 1 --num-stack 1 --num-steps 2048 --num-processes 1 --lr~'loguniform(1e-5, 1.0)' --entropy-coef 0 --value-loss-coef 1 --ppo-epoch 10 --num-mini-batch 32 --gamma~'uniform(.95, .9995)' --tau 0.95 --num-frames 1000000 --eval-env-seeds-file ./seeds.json --no-vis --log-dir~trial.hash_name
+orion -v hunt -n ppo_hopper \
+  ./main.py --env-name "Hopper-v2" --algo ppo --use-gae --vis-interval 1 \
+  --log-interval 1 --num-stack 1 --num-steps 2048 --num-processes 1 \
+  --lr~'loguniform(1e-5, 1.0)' --entropy-coef 0 --value-loss-coef 1 \
+  --ppo-epoch 10 --num-mini-batch 32 --gamma~'uniform(.95, .9995)' --tau 0.95 \
+  --num-frames 1000000 --eval-env-seeds-file ./seeds.json --no-vis \
+  --log-dir~trial.hash_name
 ```
+
+Notice that this will search over the learning rates and gamma values, while setting the log directory name to be the hashed trial name provided in the orion database.
